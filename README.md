@@ -1,197 +1,168 @@
-# iStocker – AI-Based Investment Decision Support System
+# IStocker
 
-## 📌 Project Overview
-iStocker is an **AI-based decision support system** designed to help **retail (beginner) investors** in the Egyptian stock market make more informed investment decisions.
+A web-based financial forecasting and risk profiling platform for EGX market analytics.
 
-The system provides investment recommendations based on:
-- User risk profiling
-- Market data analysis
-- Machine learning predictions (as a supporting signal)
-
-⚠️ This project is **not a trading system** and does not guarantee profits.  
-It is an educational decision-support tool.
+IStocker combines time-series modeling, machine learning forecasting, and personalized risk assessment into a modular, scalable web architecture.
 
 ---
 
-## 🧠 System Architecture
-The system follows a:
-- **Layered Architecture**
-- With **Feature-Based Organization** inside each layer
+## 🏗 Architecture Overview
 
-### Main Layers:
-1. **Presentation Layer** – User Interface (HTML / CSS / JavaScript)
-2. **Business Layer** – Core decision logic
-3. **Data Layer** – Data storage and access
-4. **Machine Learning Layer** – Model training, evaluation, and inference
+IStocker follows a layered web architecture:
 
-**Goal:**  
-Clear separation of concerns, maintainability, and scalability.
+Presentation Layer → API Layer → Business Logic → ML Engine → Infrastructure → Data Storage
 
----
+This separation ensures:
 
-## 📁 Project Structure
-The project is organized into clearly defined layers.  
-Each folder has **one responsibility only**.
-
-## 1. Data Layer (`data/`)
-This layer is responsible for **all data preparation activities** before any model training.
-
-
-### `raw/`
-- Contains raw, unmodified data
-- Data sources may include APIs, CSV files, or databases
-- **No changes are allowed** in this folder
-
-**Purpose:**  
-Single source of truth for original data
+- Clear responsibility boundaries  
+- Scalability  
+- Maintainability  
+- Production-readiness  
+- Time-series discipline  
 
 ---
 
-### `preprocessing/`
-- Data cleaning and basic preparation
-- Examples:
-  - Handling missing values
-  - Type conversion
-  - Scaling and normalization
-  - Encoding categorical variables
+## 📂 Project Structure
 
-**Purpose:**  
-Make the data usable (not analytical)
 
 ---
 
-### `eda/`
-- Exploratory Data Analysis
-- Used to understand:
-  - Distributions
-  - Correlations
-  - Outliers
-  - Trends and anomalies
-- Typically contains notebooks and analysis reports
+## 🖥 Presentation Layer (`presentation/`)
 
-**Purpose:**  
-Understand the data before modeling  
-**Note:** EDA is not used during runtime
+Frontend interface built with HTML, CSS, and JavaScript.
 
----
+Includes:
 
-### `feature_engineering/`
-- Creation of new features from existing data
-- Examples:
-  - Lag features
-  - Rolling statistics
-  - Technical indicators
+- Modular CSS structure
+- Component-based styling
+- API client layer
+- Arabic / English localization
+- Financial dashboard UI
 
-**Purpose:**  
-Enrich the dataset with meaningful signals
+This layer communicates exclusively with the API layer.
 
 ---
 
-### `feature_selection/`
-- Selecting the most relevant features
-- Reducing noise and dimensionality
-- Preventing overfitting
+## 🌐 API Layer (`api/`)
 
-**Purpose:**  
-Decide which features will be used by the model
+Handles:
 
----
+- HTTP routing
+- Request validation
+- Data serialization
+- Response formatting
 
-### `datasets/`
-- Final datasets after preprocessing, engineering, and selection
-- These datasets are the **only inputs** to the AI models
-
-**Purpose:**  
-Provide clean and ready-to-use data for training and inference
+The API layer does not contain financial logic.  
+It delegates all processing to the business layer.
 
 ---
 
-## 2. AI Layer (`ml/`)
-This layer contains everything related to machine learning models.
+## 🧠 Business Layer (`business/`)
 
+Core domain logic including:
 
-### `training/`
-- Model training scripts
-- Experiments and hyperparameter tuning
+- Market processing
+- Risk assessment
+- User classification
+- Recommendation engine
+- Decision orchestration pipeline
 
-**Purpose:**  
-Teach the model using prepared datasets
-
----
-
-### `models/`
-- Saved trained models
-- Serialized artifacts (e.g., `.pkl`, `.joblib`)
-
-**Purpose:**  
-Store trained models for reuse
+This layer enforces financial rules and system decisions but does not directly access the database.
 
 ---
 
-### `inference/`
-- Loading trained models
-- Generating predictions using new data
+## 🤖 ML Engine (`ml/`)
 
-**Purpose:**  
-Use the trained model (no training happens here)
+Machine learning subsystem responsible for:
+
+- Model training
+- Hyperparameter configuration
+- Backtesting
+- Evaluation metrics
+- Inference
+- Confidence scoring
+
+Model artifacts are stored in:
+
 
 ---
 
-## 3. Business Layer (`business/`)
-This layer contains the **system logic**, independent of data preparation and model internals.
+## 🗄 Infrastructure Layer (`infrastructure/`)
 
+Handles system-level integrations such as:
 
-- Business rules
-- Decision-making logic
-- Post-processing of model outputs
+- Database connection
+- Repository pattern
+- External APIs
 
-**Purpose:**  
-Convert predictions into actionable decisions
-
----
-
-## 4. Application Layer (`app/`)
-This layer exposes the system through a Flask application.
-
-
-- Handles HTTP requests
-- Calls business logic
-- Returns responses to users or clients
-
-**Important Notes:**
-- No data preprocessing
-- No feature engineering
-- No model training
-
-**Purpose:**  
-Serve the system to users via an API or interface
+This is the only layer that communicates directly with the database.
 
 ---
 
-## 5. Environment Configuration
-### `environment.yml`
+## 📊 Data Layer (`data/`)
 
-This file defines the Conda environment used across the project to ensure consistency among all team members.
+Storage-only layer.
 
-- Defines Python version
-- Defines core dependencies
-- Keeps the environment portable and reproducible
+Contains:
 
----
+- Raw and processed market data
+- ML datasets
+- Metadata
+- System logs
+- User storage
 
-## Design Philosophy
-The project follows this clear flow:
-
-**Data prepares → AI learns → Business decides → App serves**
-
-Each layer is isolated to:
-- Reduce complexity
-- Improve maintainability
-- Enable team collaboration
+No business logic exists inside this folder.
 
 ---
 
-## Notes
-- The environment is intentionally minimal at the early stage
-- Dependencies will be added incrementally as the project evolves
-- Each folder should only contain code relevant to its responsibility
+## 🔬 Research (`research/`)
+
+Contains:
+
+- Exploratory Data Analysis (EDA)
+- Experimental notebooks
+- Hypothesis testing
+
+Not part of runtime system.
+
+---
+
+## ⚙ Configuration (`config/`)
+
+Centralized configuration files:
+
+- Constants
+- Paths
+- Environment settings
+
+Ensures configurable and environment-safe deployment.
+
+---
+
+## 🧪 Testing (`tests/`)
+
+Automated tests for:
+
+- Data pipeline validation
+- Recommendation engine logic
+- Risk assessment consistency
+
+---
+
+## 🚀 Features
+
+- EGX30 time-series forecasting  
+- Machine learning-driven predictions  
+- Risk-based recommendation engine  
+- Bilingual user interface  
+- Modular layered architecture  
+- Scalable backend design  
+
+---
+
+## 🛠 Setup Instructions
+
+### 1️⃣ Create Conda Environment
+
+```bash
+conda env create -f environment.yml
