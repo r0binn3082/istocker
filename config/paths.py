@@ -27,3 +27,9 @@ TEST_DATA = ML_DIR / "datasets" / "test.csv"
 # -------------------------
 EDA_OUTPUT_DIR = BASE_DIR / "research" / "EDA" / "outputs"
 EDA_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+
+# -------------------------
+# TEMPLATE
+
+TEMPLATE_HTML = BASE_DIR / "presentation"
