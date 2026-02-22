@@ -13,7 +13,7 @@ ML_DIR = DATA_DIR / "ml_data"
 # -------------------------
 # Market Data Files |
 # -------------------------
-RAW_MARKET_FILE = MARKET_DIR / "raw" / "EGX30_All_Data_Combined.csv"
+RAW_MARKET_FILE = MARKET_DIR / "raw" / "EGX30_Full_Dataset_Ready.csv"
 PROCESSED_MARKET_FILE = MARKET_DIR / "processed" / "egx30_clean.csv"
 
 # -------------------------
